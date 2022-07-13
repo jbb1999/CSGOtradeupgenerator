@@ -1,15 +1,9 @@
-SoCo
+CSGO trade up generator
 ====
 
-SoCo (Sonos Controller) is a Python library that allows you to
-control `Sonos speakers`_ programmatically. It was originally created at `Music
-Hack Day Sydney`_ by `Rahim Sonawalla`_ and is now developed by a `team of
-people`_ at its `GitHub repository`_
+CSGO trade up generator is a generator that generates all possible trade ups and deems their profitability. It uses a data scraper to first make a db list, then start generating.
+For more information about the project, feel free to dm me on discord. Jbb#0001
 
-For more background on the project, please see Rahim's `blog post
-<http://www.hirahim.com/blog/2012/04/29/dissecting-the-sonos-controller/>`_.
-
-Visit the `SoCo documentation`_ for a more detailed overview of the functionailty.
 
 .. image:: https://badges.gitter.im/SoCo/SoCo.svg
    :alt: Join the chat at https://gitter.im/SoCo/SoCo
