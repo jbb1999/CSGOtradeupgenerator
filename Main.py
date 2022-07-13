@@ -1,4 +1,5 @@
 from scraper import extract, csgostash
+from functions import database_size
 import mysql.connector
 mydb = mysql.connector.connect(
   host="localhost",
@@ -7,12 +8,10 @@ mydb = mysql.connector.connect(
   database = "csgotradeup"
 )
 mycursor = mydb.cursor()
-mycursor2 = mydb.cursor()
 
 
 
-
-temp1=int(input("What do you wish to do. \n1. run scraper \n2. run scraper and clear database\n3. check database for profitability trade up.\n"))
+temp1=int(input("What do you wish to do. \n1. run scraper \n2. run scraper and clear database\n3. check database for profitability trade up.\n4. check database total size.\n5. check database total size and display sperate table size.\n"))
 temp2=None
 if temp1 == 1:
     for i in range(100, 1534):
@@ -44,6 +43,49 @@ elif temp1 == 3:
     data = mycursor.fetchall()
     for i in data:
         print(i)
+elif temp1 == 4:
+    database_size_total_1, unused = database_size("csgotradeup", "tradeup")
+    database_size_total_2, unused = database_size("csgotradeup", "classified")
+    database_size_total_3, unused = database_size("csgotradeup", "consumer")
+    database_size_total_4, unused = database_size("csgotradeup", "covert")
+    database_size_total_5, unused = database_size("csgotradeup", "error")
+    database_size_total_6, unused = database_size("csgotradeup", "industrial")
+    database_size_total_7, unused = database_size("csgotradeup", "milspec")
+    database_size_total_8, unused = database_size("csgotradeup", "restricted")
+    database_size_total = database_size_total_1 + database_size_total_2 + database_size_total_3 + database_size_total_4 + database_size_total_5 + database_size_total_6 + database_size_total_7 + database_size_total_8
+    print(database_size_total)
+elif temp1 == 5:
+    database_size_total_1, print_command_1 = database_size("csgotradeup", "tradeup")
+    for item in print_command_1:
+        print(item[0], "Size in MB: ", item[-1])
+    database_size_total_2, print_command_2 = database_size("csgotradeup", "classified")
+    for item in print_command_2:
+        print(item[0], "Size in MB: ", item[-1])
+    database_size_total_3, print_command_3 = database_size("csgotradeup", "consumer")
+    for item in print_command_3:
+        print(item[0], "Size in MB: ", item[-1])
+    database_size_total_4, print_command_4 = database_size("csgotradeup", "covert")
+    for item in print_command_4:
+        print(item[0], "Size in MB: ", item[-1])
+    database_size_total_5, print_command_5 = database_size("csgotradeup", "error")
+    for item in print_command_5:
+        print(item[0], "Size in MB: ", item[-1])
+    database_size_total_6, print_command_6 = database_size("csgotradeup", "industrial")
+    for item in print_command_6:
+        print(item[0], "Size in MB: ", item[-1])
+    database_size_total_7, print_command_7 = database_size("csgotradeup", "milspec")
+    for item in print_command_7:
+        print(item[0], "Size in MB: ", item[-1])
+    database_size_total_8, print_command_8 = database_size("csgotradeup", "restricted")
+    for item in print_command_8:
+        print(item[0], "Size in MB: ", item[-1])
+    database_size_total = database_size_total_1 + database_size_total_2 + database_size_total_3 + database_size_total_4 + database_size_total_5 + database_size_total_6 + database_size_total_7 + database_size_total_8
+    print(f"Total database size MB: {database_size_total}")
+
+
+
+
+
 
 
 
