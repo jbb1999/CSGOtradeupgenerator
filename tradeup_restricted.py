@@ -42,17 +42,19 @@ def collection_outcome(collection_1,collection_2,collection_3,collection_4,colle
   collection_5_outcome = mycursor.fetchall()
 #  print(collection_1_outcome,"\n",collection_2_outcome,"\n",collection_3_outcome,"\n",collection_4_outcome,"\n",collection_5_outcome,"\n")
   try:
-    prices = [collection_1_outcome[0][3], collection_2_outcome[0][3], collection_3_outcome[0][3], collection_4_outcome[0][3], collection_5_outcome[0][3]]
+    prices = [collection_1_outcome[0][3], collection_2_outcome[0][3], collection_3_outcome[0][3],
+              collection_4_outcome[0][3], collection_5_outcome[0][3]]
     prices_list = []
     for price in prices:
       if price != "Possible" or 0:
         prices_list.append(str_float(price) * 2)
       else:
         prices.remove(price)
-    prices_ingrediantes = [collection_1[0][3], collection_2[0][3], collection_3[0][3], collection_4[0][3], collection_5[0][3]]
-#    print("test2")
-#    print(prices_ingrediantes, "\n")
-#    print(collection_1,"\n", collection_2,"\n", collection_3,"\n", collection_4,"\n",collection_5)
+    prices_ingrediantes = [collection_1[0][3], collection_2[0][3], collection_3[0][3], collection_4[0][3],
+                           collection_5[0][3]]
+    #    print("test2")
+    #    print(prices_ingrediantes, "\n")
+    #    print(collection_1,"\n", collection_2,"\n", collection_3,"\n", collection_4,"\n",collection_5)
     prices_ingrediants_list = []
     for price in prices_ingrediantes:
       if price != "Possible" or 0:
@@ -63,23 +65,15 @@ def collection_outcome(collection_1,collection_2,collection_3,collection_4,colle
         else:
           pass
     prices_ingrediants_list_sum = sum(prices_ingrediants_list)
-    price_sum = sum(prices_list)/10
+    price_sum = sum(prices_list) / 10
     if price_sum != 0:
       price_sum_temp = price_sum
- #     print(price_sum)
-      price_profitability_temp = price_sum/int(prices_ingrediants_list_sum)
+      #      print(price_sum)
+      price_profitability_temp = price_sum / int(prices_ingrediants_list_sum)
     else:
-      print("no recent prices on any items\n")
+      #      print("no recent prices on any items\n")
+      pass
     print(current)
-    if price_profitability_temp != None:
-      print(price_profitability_temp, "profitability")
-    else:
-      pass
-    print(prices_ingrediants_list_sum, "cost of the ingrediants")
-    if price_sum_temp != None:
-      print(price_sum_temp,"price of outcome", "\n")
-    else:
-      pass
   except Exception as error:
     try:
       mycursor.execute("INSERT INTO error (ID, ERROR) VALUES (%s, %s)", (int(ids), str(error)))
@@ -87,29 +81,33 @@ def collection_outcome(collection_1,collection_2,collection_3,collection_4,colle
     except:
       pass
   try:
-    mycursor.execute(
-      "INSERT INTO tradeup (profitability, cost_ingredient, cost_resault, skin_id_1, skin_cost_1, skin_id_2, skin_cost_2, skin_id_3, skin_cost_3, skin_id_4, skin_cost_4, skin_id_5, skin_cost_5, from_to) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-      (price_profitability_temp, prices_ingrediants_list_sum, price_sum_temp, collection_1[0][1],collection_1[0][3], collection_2[0][1],collection_2[0][3],
-       collection_3[0][1],collection_3[0][3], collection_4[0][1],collection_4[0][3], collection_5[0][1],collection_5[0][3], "restricted-classified"))
-    mydb.commit()
-  except Exception as error:
-      try:
-        mycursor.execute("INSERT INTO error (ID, ERROR) VALUES (%s, %s)", (int(ids), str(error)))
+    if price_profitability_temp > 0.6:
+      if collection_1[0][3] != "Possible" and collection_2[0][3] != "Possible" and collection_3[0][3] != "Possible" and collection_4[0][3] != "Possible" and collection_5[0][3] != "Possible":
+        mycursor.execute(
+          "INSERT INTO tradeup (profitability, cost_ingredient, cost_resault, skin_id_1, skin_cost_1, skin_id_2, skin_cost_2, skin_id_3, skin_cost_3, skin_id_4, skin_cost_4, skin_id_5, skin_cost_5, from_to) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+          (price_profitability_temp, prices_ingrediants_list_sum, price_sum_temp, collection_1[0][1], collection_1[0][3],
+           collection_2[0][1], collection_2[0][3],
+           collection_3[0][1], collection_3[0][3], collection_4[0][1], collection_4[0][3], collection_5[0][1],
+           collection_5[0][3], "restricted-classified"))
         mydb.commit()
-      except:
-          pass
+      else:
+        pass
+  except Exception as error:
+    try:
+      mycursor.execute("INSERT INTO error (ID, ERROR) VALUES (%s, %s)", (int(ids), str(error)))
+      mydb.commit()
+    except:
+      pass
 
 
 
 
 
-
-
-for i in range(1,100):
-  for o in range(1,100):
-    for p in range(1,100):
-      for a in range(1,100):
-        for s in range(1,100):
+for i in range(1,229):
+  for o in range(3,229):
+    for p in range(1,229):
+      for a in range(1,229):
+        for s in range(1,229):
           sql="SELECT * FROM restricted WHERE ID = %s"
           id=i,
           mycursor.execute(sql, id)
@@ -131,9 +129,13 @@ for i in range(1,100):
           mycursor.execute(sql, id)
           item_5 = mycursor.fetchall()
 #          print(item_1,"\n",item_2,"\n",item_3,"\n",item_4,"\n",item_5,"\n",)
-          collection = [item_1[0][4],item_2[0][4],item_3[0][4],item_4[0][4],item_5[0][4]]
-          prices = [item_1[0][3],item_2[0][3],item_3[0][3],item_4[0][3],item_5[0][3]]
-          prices_list = []
+          try:
+            collection = [item_1[0][4],item_2[0][4],item_3[0][4],item_4[0][4],item_5[0][4]]
+            prices = [item_1[0][3], item_2[0][3], item_3[0][3], item_4[0][3], item_5[0][3]]
+            prices_list = []
+          except:
+            pass
+
           for price in prices:
             if price != "Possible":
                prices_list.append(str_float(price)*2)
@@ -142,7 +144,10 @@ for i in range(1,100):
 #              print(price)
           price_sum=sum(prices_list)
           current = f"{i}-{o}-{p}-{a}-{s}"
-          collection_outcome(item_1,item_2,item_3,item_4,item_5, current)
+          try:
+            collection_outcome(item_1,item_2,item_3,item_4,item_5, current)
+          except:
+            pass
 
 
 
