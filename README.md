@@ -41,6 +41,7 @@ CSGO TUG supports the following features:
  - trade up generation
  - profitability caulculator
  - datbase logging for both skins and trade ups
+ - database size checker
 
 Features to come
 --------
