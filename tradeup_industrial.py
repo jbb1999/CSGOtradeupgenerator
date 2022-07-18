@@ -101,11 +101,19 @@ def collection_outcome(collection_1,collection_2,collection_3,collection_4,colle
       pass
 
 
-for i in range(1,115):
-  for o in range(18,115):
-    for p in range(1,115):
-      for a in range(1,115):
-        for s in range(1,115):
+
+sql = "SELECT ID FROM industrial ORDER BY ID DESC LIMIT 1;"
+mycursor.execute(sql)
+amount_of_data = mycursor.fetchall()
+amount_of_data = amount_of_data[0][0]
+
+
+
+for i in range(1,amount_of_data+1):
+  for o in range(1,amount_of_data+1):
+    for p in range(1,amount_of_data+1):
+      for a in range(1,amount_of_data+1):
+        for s in range(1,amount_of_data+1):
           sql="SELECT * FROM industrial WHERE ID = %s"
           id=i,
           mycursor.execute(sql, id)
