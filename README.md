@@ -21,8 +21,11 @@ CSGO TUG relies on a database to function. You can setup a mysql database on a s
 
 Basic Usage
 -----------
-
-You can start by running main.py and running the scraper, when thats done i suggest you start running the tradeup type you wish.
+1. Import the .sql file into mysql.
+2. run main.py and run the data scraper (press 1)
+3. wait for it to finish
+4. run trade up by pressing 6
+5. after a while you can run main.py and check profitability by pressing 3
 ALSO note that this code is inspired by similar projects and might contain ways of doing things similar to other projects.
 
 
