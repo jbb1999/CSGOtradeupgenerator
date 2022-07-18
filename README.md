@@ -43,14 +43,14 @@ CSGO TUG supports the following features:
  - profitability caulculator
  - datbase logging for both skins and trade ups
  - database size checker
+ - multi threading(sort of)
+ - db structure file.
 
 Features to come
 --------
 
 I am working on these atm and may come down the line.
  - excel sheet alternative to DB
- - DB easy setup
  - web UI
- - multi threading
  - price limiter
 Note that i have no eta for these and might not add them at all.
