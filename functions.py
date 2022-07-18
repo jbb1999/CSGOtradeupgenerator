@@ -1,4 +1,6 @@
 import mysql.connector
+import requests
+url_main=f"https://csgostash.com/skin/"
 
 mydb = mysql.connector.connect(
   host="localhost",
@@ -19,3 +21,20 @@ def database_size(database_name, table_name):
     data = mycursor.fetchall()
     for item in data:
         return item[-1],data
+
+
+def name_scraper(ids):
+    response = requests.get(f"https://csgostash.com/skin/{ids}")
+    name = response.text.split('</title>')[0].split("\n")[-1]
+    name = name[7:name.find("CS:GO")].strip()
+    if name[-1] == "-":
+        name = name[:-1]
+    return name.strip()
+
+
+
+
+
+
+
+

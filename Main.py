@@ -1,6 +1,12 @@
 from scraper import extract, csgostash
-from functions import database_size
+from functions import database_size, name_scraper
+from tradeup_consumer import tradeup_consumer
+from tradeup_industrial import tradeup_industrial
+from tradeup_classified import tradeup_classified
+from tradeup_restricted import tradeup_restricted
 import mysql.connector
+import time
+from threading import Thread
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
@@ -11,7 +17,7 @@ mycursor = mydb.cursor()
 
 
 
-temp1=int(input("What do you wish to do. \n1. run scraper \n2. run scraper and clear database\n3. check database for profitability trade up.\n4. check database total size.\n5. check database total size and display sperate table size.\n"))
+temp1=int(input("What do you wish to do. \n1. run scraper \n2. run scraper and clear database\n3. check database for profitability trade up.\n4. check database total size.\n5. check database total size and display sperate table size.\n6. run trade up bots.\n"))
 temp2=None
 if temp1 == 1:
     for i in range(100, 1534):
@@ -65,8 +71,21 @@ elif temp1 == 3:
     sql = "select profitability,cost_ingredient,cost_resault,skin_id_1,skin_id_2,skin_id_3,skin_id_4,skin_id_5,from_to from tradeup order by profitability desc limit 1,10;"
     mycursor.execute(sql)
     data = mycursor.fetchall()
+    print("NOTE: These resaults can be wrong and its recomended to always double check them with a site such as csgofloat.")
+    print("DATA is sorted by PROFITABILITY, Cost, Resault, skin id 1, skin id 2, skin id 3, skin id 4, skin id 5, and from-to")
+    time.sleep(5)
     for i in data:
         print(i)
+        print(name_scraper(i[3]))
+        print(name_scraper(i[4]))
+        print(name_scraper(i[5]))
+        print(name_scraper(i[6]))
+        print(name_scraper(i[7]))
+
+
+
+
+
 elif temp1 == 4:
     database_size_total_1, unused = database_size("csgotradeup", "tradeup")
     database_size_total_2, unused = database_size("csgotradeup", "classified")
@@ -105,6 +124,19 @@ elif temp1 == 5:
         print(item[0], "Size in MB: ", item[-1])
     database_size_total = database_size_total_1 + database_size_total_2 + database_size_total_3 + database_size_total_4 + database_size_total_5 + database_size_total_6 + database_size_total_7 + database_size_total_8
     print(f"Total database size MB: {database_size_total}")
+elif temp1 == 6:
+    thread1 = Thread(target=tradeup_consumer)
+    thread1.start()
+    thread2 = Thread(target=tradeup_industrial)
+    thread2.start()
+    thread3 = Thread(target=tradeup_classified)
+    thread3.start()
+    thread4 = Thread(target=tradeup_restricted)
+    thread4.start()
+
+
+
+
 
 
 

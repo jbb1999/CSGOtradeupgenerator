@@ -1,2 +1,8 @@
 
 test.py
+__pycache__/tradeup_restricted.cpython-310.pyc
+__pycache__/tradeup_industrial.cpython-310.pyc
+__pycache__/tradeup_consumer.cpython-310.pyc
+__pycache__/tradeup_classified.cpython-310.pyc
+__pycache__/scraper.cpython-310.pyc
+__pycache__/functions.cpython-310.pyc

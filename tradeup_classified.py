@@ -109,45 +109,43 @@ amount_of_data = mycursor.fetchall()
 amount_of_data = amount_of_data[0][0]
 
 
-
-for i in range(1,amount_of_data+1):
-  for o in range(1,amount_of_data+1):
-    for p in range(1,amount_of_data+1):
-      for a in range(1,amount_of_data+1):
-        for s in range(1,amount_of_data+1):
-          sql="SELECT * FROM classified WHERE ID = %s"
-          id=i,
-          mycursor.execute(sql, id)
-          item_1 = mycursor.fetchall()
-          sql = "SELECT * FROM classified WHERE ID = %s"
-          id=o,
-          mycursor.execute(sql, id)
-          item_2 = mycursor.fetchall()
-          sql = "SELECT * FROM classified WHERE ID = %s"
-          id=p,
-          mycursor.execute(sql, id)
-          item_3 = mycursor.fetchall()
-          sql = "SELECT * FROM classified WHERE ID = %s"
-          id=a,
-          mycursor.execute(sql, id)
-          item_4 = mycursor.fetchall()
-          sql = "SELECT * FROM classified WHERE ID = %s"
-          id=s,
-          mycursor.execute(sql, id)
-          item_5 = mycursor.fetchall()
-#            print(item_1,"\n",item_2,"\n",item_3,"\n",item_4,"\n",item_5,"\n",)
-          collection = [item_1[0][4],item_2[0][4],item_3[0][4],item_4[0][4],item_5[0][4]]
-          prices = [item_1[0][3],item_2[0][3],item_3[0][3],item_4[0][3],item_5[0][3]]
-          prices_list = []
-          for price in prices:
-            if price != "Possible":
-               prices_list.append(str_float(price)*2)
-            else:
-              prices.remove(price)
-#              print(price)
-          price_sum=sum(prices_list)
-          current = f"{i}-{o}-{p}-{a}-{s}"
-          collection_outcome(item_1,item_2,item_3,item_4,item_5, current)
+def tradeup_classified():
+  for i in range(1,amount_of_data+1):
+    for o in range(1,amount_of_data+1):
+      for p in range(1,amount_of_data+1):
+        for a in range(1,amount_of_data+1):
+          for s in range(1,amount_of_data+1):
+            sql="SELECT * FROM classified WHERE ID = %s"
+            id=i,
+            mycursor.execute(sql, id)
+            item_1 = mycursor.fetchall()
+            sql = "SELECT * FROM classified WHERE ID = %s"
+            id=o,
+            mycursor.execute(sql, id)
+            item_2 = mycursor.fetchall()
+            sql = "SELECT * FROM classified WHERE ID = %s"
+            id=p,
+            mycursor.execute(sql, id)
+            item_3 = mycursor.fetchall()
+            sql = "SELECT * FROM classified WHERE ID = %s"
+            id=a,
+            mycursor.execute(sql, id)
+            item_4 = mycursor.fetchall()
+            sql = "SELECT * FROM classified WHERE ID = %s"
+            id=s,
+            mycursor.execute(sql, id)
+            item_5 = mycursor.fetchall()
+            collection = [item_1[0][4],item_2[0][4],item_3[0][4],item_4[0][4],item_5[0][4]]
+            prices = [item_1[0][3],item_2[0][3],item_3[0][3],item_4[0][3],item_5[0][3]]
+            prices_list = []
+            for price in prices:
+              if price != "Possible":
+                 prices_list.append(str_float(price)*2)
+              else:
+                prices.remove(price)
+            price_sum=sum(prices_list)
+            current = f"{i}-{o}-{p}-{a}-{s}"
+            collection_outcome(item_1,item_2,item_3,item_4,item_5, current)
 
 
 
