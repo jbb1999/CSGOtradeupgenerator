@@ -23,6 +23,7 @@ Basic Usage
 -----------
 
 You can start by running main.py and running the scraper, when thats done i suggest you start running the tradeup type you wish.
+ALSO note that this code is inspired by similar projects and might contain ways of doing things similar to other projects.
 
 
 
